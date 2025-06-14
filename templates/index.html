@@ -50,7 +50,7 @@
 
         try {
             // Make sure this URL matches your Flask backend endpoint
-            const response = await fetch(`http://127.0.0.1:5000/search?q=${encodeURIComponent(keyword)}`);
+            const response = await fetch(`https://google-search-app-wvj1.onrender.com/search?q=${encodeURIComponent(keyword)}`);
 
             if (!response.ok) {
                 // Nếu phản hồi không OK, cố gắng đọc lỗi từ JSON nếu có
