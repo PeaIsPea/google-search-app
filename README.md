@@ -49,4 +49,4 @@ A simple web app that mimics Google Search using SerpAPI for search results.
 
 ## License
 
-MIT
+NGUYEN NGOC PHUC
