@@ -31,7 +31,7 @@ A simple web app that mimics Google Search using SerpAPI for search results.
    pip install -r requirements.txt
    ```
 
-3. Set up your SerpAPI key in `config.py`:
+3. Set up your SerpAPI key in `app.py`:
    ```python
    SERP_API_KEY = 'your_serpapi_key'
    ```
