@@ -5,14 +5,15 @@ A simple web app that mimics Google Search using SerpAPI for search results.
 ## Features
 
 - Perform web search via input
-- Display real search results (title, snippet, link)
+- Display real search results (title, link)
+- Downloadable results extract
 - Backend API built with Flask
 - Frontend: pure HTML, CSS, JavaScript
 - Deployed on Render
 
 ## Tech Stack
 
-- **Frontend:** HTML, CSS, JavaScript (Vanilla)
+- **Frontend:** HTML, CSS, JavaScript
 - **Backend:** Python Flask
 - **Search API:** [SerpAPI](https://serpapi.com/)
 - **Hosting:** [Render](https://render.com/)
@@ -44,7 +45,7 @@ A simple web app that mimics Google Search using SerpAPI for search results.
 
 ## Live Demo
 
-👉 [Live on Render](https://your-app-url.onrender.com) *(replace with your actual link)*
+👉 [Live on Render](https://google-search-app-wvj1.onrender.com/)
 
 ## License
 
