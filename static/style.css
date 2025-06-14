@@ -1,0 +1,105 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #f4f4f4;
+    color: #333;
+}
+.container {
+    max-width: 800px;
+    margin: auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+h1 {
+    text-align: center;
+    color: #0056b3;
+}
+.search-section {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+.search-section input[type="text"] {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+}
+.search-section button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+.search-section button:hover {
+    background-color: #0056b3;
+}
+.results-section h2 {
+    color: #007bff;
+    margin-top: 0;
+}
+.result-item {
+    background-color: #e9f0f9;
+    border: 1px solid #d4e0ed;
+    border-radius: 6px;
+    padding: 15px;
+    margin-bottom: 10px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    overflow: hidden;
+}
+
+.result-item h3 {
+    margin-top: 0;
+    margin-bottom: 5px;
+    color: #0056b3;
+}
+
+.result-item a {
+    color: #007bff;
+    text-decoration: none;
+    
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    word-break: break-all;
+}
+
+
+.result-item a:hover {
+    text-decoration: underline;
+}
+.download-section {
+    text-align: center;
+    margin-top: 20px;
+}
+.download-section button {
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+.download-section button:hover {
+    background-color: #218838;
+}
+#loading {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 1.1em;
+    color: #555;
+}
+
+
+.url-display {
+    word-break: break-all;
+    overflow-wrap: break-word; 
+}

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Search Scraper</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    
+</head>
+<body>
+    <div class="container">
+        <h1>Google Search Scraper</h1>
+
+        <div class="search-section">
+            <input type="text" id="keywordInput" placeholder="Enter search keyword">
+            <button onclick="search()">Search</button>
+        </div>
+
+        <div id="loading" style="display: none;">Searching... Please wait.</div>
+
+        <div class="results-section">
+            <h2>Search Results</h2>
+            <div id="results">
+                <p>No results yet. Enter a keyword and click Search.</p>
+            </div>
+        </div>
+
+        <div class="download-section">
+            <button onclick="downloadResults()" style="display: none;" id="downloadBtn">Download Results (JSON)</button>
+        </div>
+    </div>
+
+    <script>
+    let searchResultsData = []; // To store data for download
+
+    async function search() {
+        const keyword = document.getElementById('keywordInput').value;
+        const resultsDiv = document.getElementById('results');
+        const loadingDiv = document.getElementById('loading');
+        const downloadBtn = document.getElementById('downloadBtn');
+
+        if (!keyword) {
+            alert('Please enter a keyword.');
+            return;
+        }
+
+        resultsDiv.innerHTML = ''; // Clear previous results
+        downloadBtn.style.display = 'none'; // Hide download button
+        loadingDiv.style.display = 'block'; // Show loading message
+
+        try {
+            // Make sure this URL matches your Flask backend endpoint
+            const response = await fetch(`http://127.0.0.1:5000/search?q=${encodeURIComponent(keyword)}`);
+
+            if (!response.ok) {
+                // Nếu phản hồi không OK, cố gắng đọc lỗi từ JSON nếu có
+                const errorData = await response.json().catch(() => ({})); // Đọc JSON hoặc {} nếu không phải JSON
+                const errorMessage = errorData.error || `HTTP error! status: ${response.status}`;
+                throw new Error(errorMessage);
+            }
+
+            searchResultsData = await response.json(); // Store data
+            loadingDiv.style.display = 'none'; // Hide loading
+
+            if (searchResultsData.length === 0) {
+                resultsDiv.innerHTML = '<p>No organic listings found for this keyword.</p>';
+                return;
+            }
+
+            searchResultsData.forEach(item => {
+                const resultItem = document.createElement('div');
+                resultItem.classList.add('result-item');
+                
+                resultItem.innerHTML = `
+                    <h3><a href="${item.url}" target="_blank">${item.title}</a></h3>
+                    <p class="url-display">${item.url}</p>
+                `;
+                resultsDiv.appendChild(resultItem);
+            });
+
+            downloadBtn.style.display = 'block'; // Show download button
+        } catch (error) {
+            console.error('Error fetching search results:', error);
+            loadingDiv.style.display = 'none'; // Hide loading
+            resultsDiv.innerHTML = `<p style="color: red;">Error fetching results. Please try again. (${error.message})</p>`;
+            downloadBtn.style.display = 'none';
+        }
+    }
+
+    function downloadResults() {
+        if (searchResultsData.length === 0) {
+            alert('No results to download.');
+            return;
+        }
+
+        const jsonStr = JSON.stringify(searchResultsData, null, 2);
+        const blob = new Blob([jsonStr], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'Google Search_results.json'; // Tên file khi tải xuống
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url); // Clean up the object URL to free memory
+    }
+</script>
+</body>
+</html>
